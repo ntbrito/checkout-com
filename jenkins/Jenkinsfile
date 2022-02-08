@@ -1,0 +1,46 @@
+pipeline {
+agent { label 'Docker' }
+
+    environment {
+        JENKINS_HOME="/efsvolume/jenkins/home"
+    }
+
+    stages {
+
+      stage('Build Container') {
+          steps {
+              ansiblePlaybook(
+                  credentialsId: '27ee143e-d67e-4397-a23a-96e9a665debe',
+                  playbook: '${JENKINS_HOME}/workspace/ansible-roles/jenkins.yml',
+                  extras: '-vv --extra-vars "work_dir=$WORKSPACE version=$BUILD_NUMBER"'
+                )
+              }
+      }
+
+      stage('Deploy Docker') {
+          steps {
+              script {
+                  withCredentials([
+                      sshUserPrivateKey(
+                      credentialsId: '27ee143e-d67e-4397-a23a-96e9a665debe',
+                      keyFileVariable: 'jenkins_id',
+                      passphraseVariable: '',
+                      usernameVariable: 'username')]) {
+                          def remote = [name: 'jenkins',
+                                        host: 'jenkins.siliconmarkets.net',
+                                        user: 'jenkins',
+                                        identityFile: "$jenkins_id",
+                                        allowAnyHosts: true]
+                          /*
+                          sshCommand remote: remote, command:
+                              "if [[ \$(docker ps -a | grep jenkins) ]]; then docker stop jenkins; docker rm jenkins; fi"
+
+                          sshCommand remote: remote, command:
+                              "docker run -d --name jenkins --restart always -p 8080:8080 858929359558.dkr.ecr.eu-west-1.amazonaws.com/admin/jenkins:v.${BUILD_NUMBER}"
+                          */
+                  }
+              }
+          }
+      }
+   }
+}
