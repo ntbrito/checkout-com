@@ -41,6 +41,7 @@ resource "aws_lb_target_group_attachment" "webapp_attach" {
   port             = "80"
 }
 
+/*
 resource "aws_lb_listener" "jenkins_listener" {
   load_balancer_arn = aws_lb.checkout_lb.arn
   port              = "8080"
@@ -65,3 +66,4 @@ resource "aws_lb_target_group_attachment" "jenkins_attach" {
   target_id        = aws_instance.checkout_ec2[count.index].id
   port             = "8080"
 }
+*/

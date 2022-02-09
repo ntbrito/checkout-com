@@ -30,6 +30,7 @@ resource "aws_security_group_rule" "colb_80_in" {
   cidr_blocks       = ["0.0.0.0/0"]
 }
 
+/*
 resource "aws_security_group_rule" "colb_8080_in" {
   description       = "Allow 8080 ingress"
   type              = "ingress"
@@ -49,6 +50,7 @@ resource "aws_security_group_rule" "colb_8081_in" {
   security_group_id = aws_security_group.colb_sg.id
   cidr_blocks       = ["0.0.0.0/0"]
 }
+*/
 
 resource "aws_security_group_rule" "colb_all_out" {
   description       = "Allow egress everywhere"

@@ -23,7 +23,7 @@ yum install -y wget \
                jq \
                curl \
                python3 \
-               python3-pip \
+               python3-pip
 
 amazon-linux-extras install docker
 systemctl enable docker
@@ -38,11 +38,10 @@ pip3 install awscli
 
 echo "== Create docker container to run my_webapp ==" >> /tmp/user_data.log
 
-# cd ~
+cd /home/ec2-user
 git clone git://github.com/ntbrito/checkout-com.git
 cd checkout-com/web_container
 docker build --rm -t my_webapp .
-docker run -d --name my_webapp --restart always -p 8080:80 my_webapp
-
+docker run -d --name my_webapp --restart always -p 80:80 my_webapp
 
 echo "== Bootstrap finished - $(date) ==" >> /tmp/user_data.log
