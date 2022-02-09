@@ -1,3 +1,4 @@
 .idea
 *pycache*
-./terraform/.terraform/
+terraform/.terraform/
+terraform/tf_state/

@@ -15,7 +15,6 @@ ARG gid=1001
 ARG user=jenkins
 ARG group=jenkins
 ARG http_port=8080
-ARG agent_port=50000
 ARG JENKINS_HOME=/var/jenkins_home
 ARG REF=/usr/share/jenkins/ref
 
@@ -33,7 +32,8 @@ COPY jenkins_home/. ${JENKINS_HOME}
 # as the user owning the external mount point
 RUN usermod -u ${uid} jenkins \
  && groupmod -g ${gid} jenkins \
- && chown -R ${uid}:${gid} ${JENKINS_HOME} ${REF}
+ && chown -R jenkins:jenkins ${JENKINS_HOME} \
+ && chown -R jenkins:jenkins ${REF}
 
 # Jenkins home directory is a volume, so configuration and build history
 # can be persisted and survive image upgrades
@@ -41,9 +41,6 @@ VOLUME $JENKINS_HOME
 
 # for main web interface:
 EXPOSE ${http_port}
-
-# will be used by attached agents:
-EXPOSE ${agent_port}
 
 ENV COPY_REFERENCE_FILE_LOG $JENKINS_HOME/copy_reference_file.log
 
