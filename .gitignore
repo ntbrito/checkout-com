@@ -1,4 +1,5 @@
 .idea
 *pycache*
+jenkins/
 terraform/.terraform/
 terraform/tf_state/
