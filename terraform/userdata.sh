@@ -36,6 +36,13 @@ usermod -a -G docker ec2-user
 pip3 install ansible
 pip3 install awscli
 
-echo "== Create docker container to run Jenkins ==" >> /tmp/user_data.log
+echo "== Create docker container to run my_webapp ==" >> /tmp/user_data.log
+
+# cd ~
+git clone git://github.com/ntbrito/checkout-com.git
+cd checkout-com/web_container
+docker build --rm -t my_webapp .
+docker run -d --name my_webapp --restart always -p 8080:80 my_webapp
+
 
 echo "== Bootstrap finished - $(date) ==" >> /tmp/user_data.log

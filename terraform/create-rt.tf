@@ -6,7 +6,7 @@ resource "aws_route_table" "az1_private" {
   # route to the internet - through the NGW
   route {
     cidr_block     = "0.0.0.0/0"
-    nat_gateway_id = aws_nat_gateway.covpc_ngw_az2.id
+    nat_gateway_id = aws_nat_gateway.covpc_ngw_az1.id
   }
   
   tags = {

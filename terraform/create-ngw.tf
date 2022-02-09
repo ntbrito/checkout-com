@@ -45,5 +45,4 @@ resource "aws_nat_gateway" "covpc_ngw_az2" {
     Name        = "${var.project_name}-NGW-AZ2"
     Environment = var.project_name
   }
-
 }
