@@ -19,7 +19,6 @@ ARG JENKINS_HOME=/var/jenkins_home
 ARG REF=/usr/share/jenkins/ref
 
 ENV JENKINS_HOME=${JENKINS_HOME}
-ENV JENKINS_AGENT_PORT=${agent_port}
 ENV REF=${REF}
 ENV JENKINS_UC=https://updates.jenkins.io
 ENV JENKINS_UC_EXPERIMENTAL=https://updates.jenkins.io/experimental
@@ -27,7 +26,7 @@ ENV JENKINS_INCREMENTALS_REPO_MIRROR=https://repo.jenkins-ci.org/incrementals
 ENV JAVA_HOME=/opt/java/openjdk
 
 COPY jenkins_home/. ${JENKINS_HOME}
-# jenkins uid needs to be changed to 1004
+# jenkins uid needs to be changed to something else
 # by default jenkins uid is 1000 which is the same as the ec2-user on the host
 # and that causes permission problems when mounting the volume
 # jenkins_home is bind mounted externally and we need to have the same uid
@@ -46,5 +45,4 @@ EXPOSE ${http_port}
 
 ENV COPY_REFERENCE_FILE_LOG $JENKINS_HOME/copy_reference_file.log
 
-USER ${user}
 ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/jenkins.sh"]

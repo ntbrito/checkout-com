@@ -69,3 +69,7 @@ certificate and encrypt the traffic using HTTPS.
 
 #### Documentation
 You can find more details about networking on the pdf file Checkout.com.pdf.
+
+Jenkins password
+checkout
+checkout@2022

@@ -36,10 +36,21 @@ usermod -a -G docker ec2-user
 pip3 install ansible
 pip3 install awscli
 
-echo "== Create docker container to run my_webapp ==" >> /tmp/user_data.log
+echo "== Create docker container to run jenkins ==" >> /tmp/user_data.log
 
 cd /home/ec2-user
 git clone git://github.com/ntbrito/checkout-com.git
+cd checkout-com/jenkins
+docker build --rm -t jenkins .
+docker run -d --name jenkins --restart always -p 8080:8080 jenkins
+
+
+my-ip=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)
+sed -e "s/%%SHELLCOMMAND%%/ssh -i \/var\/jenkins_home\/.ssh\/id_rsa ec2-user@${my-ip} checkout-com\/bin\/build_webapp.sh/" config.xml
+
+echo "== Create docker container to run my_webapp ==" >> /tmp/user_data.log
+
+cd /home/ec2-user
 cd checkout-com/web_container
 docker build --rm -t my_webapp .
 docker run -d --name my_webapp --restart always -p 80:80 my_webapp
