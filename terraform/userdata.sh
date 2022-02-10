@@ -46,7 +46,8 @@ docker run -d --name jenkins --restart always -p 8080:8080 jenkins
 
 
 my-ip=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)
-sed -e "s/%%SHELLCOMMAND%%/ssh -i \/var\/jenkins_home\/.ssh\/id_rsa ec2-user@${my-ip} checkout-com\/bin\/build_webapp.sh/" config.xml
+sed -e "s/%%SHELLCOMMAND%%/ssh -i \/var\/jenkins_home\/.ssh\/id_rsa ec2-user@${my-ip} checkout-com\/bin\/build_webapp.sh/" \
+-i /var/jenkins_home/jobs/Deploy-WebApp/config.xml
 
 echo "== Create docker container to run my_webapp ==" >> /tmp/user_data.log
 

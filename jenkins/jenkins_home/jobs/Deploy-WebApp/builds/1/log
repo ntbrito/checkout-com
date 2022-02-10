@@ -1,0 +1,23 @@
+Started by user [8mha:////4JkNHa/wq/CiQ3WIGlCAQ4OQQszp8oO06ToEcuMDW20EAAAAmh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzeEgY+/dLi1CL95IzU5Oz80hIAvnRILcMAAAA=[0mCheckout Test
+Running as SYSTEM
+Building in workspace /var/jenkins_home/workspace/Depoy WebApp
+The recommended git tool is: NONE
+No credentials specified
+Cloning the remote Git repository
+Cloning repository git://github.com/ntbrito/checkout-com.git
+ > git init /var/jenkins_home/workspace/Depoy WebApp # timeout=10
+Fetching upstream changes from git://github.com/ntbrito/checkout-com.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.30.2'
+ > git fetch --tags --force --progress -- git://github.com/ntbrito/checkout-com.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url git://github.com/ntbrito/checkout-com.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+Checking out Revision e4e9a6647dfcd3e4e75934c9ea79ab6bd830f903 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f e4e9a6647dfcd3e4e75934c9ea79ab6bd830f903 # timeout=10
+Commit message: "opened sg port 8080"
+First time build. Skipping changelog.
+[Depoy WebApp] $ /bin/sh -xe /tmp/jenkins6146940018194706188.sh
+Finished: SUCCESS
