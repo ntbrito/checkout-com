@@ -1,4 +1,4 @@
-#! /bin/bash -e
+#!/bin/bash -e
 
 # sets the variables only if they don't have a value yet
 : "${JENKINS_WAR:="/usr/share/jenkins/jenkins.war"}"

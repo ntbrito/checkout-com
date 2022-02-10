@@ -29,6 +29,7 @@ resource "aws_security_group_rule" "http8080_in" {
   cidr_blocks       = [var.covpc_cidr_block]
 }
 
+/*
 resource "aws_security_group_rule" "http8081_in" {
   description       = "HTTP 8081 access"
   type              = "ingress"
@@ -38,6 +39,7 @@ resource "aws_security_group_rule" "http8081_in" {
   security_group_id = aws_security_group.app_sec_group.id
   cidr_blocks       = [var.covpc_cidr_block]
 }
+*/
 
 resource "aws_security_group_rule" "all_out" {
   description       = "Allow egress everywhere"

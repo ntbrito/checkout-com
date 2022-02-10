@@ -10,8 +10,8 @@ RUN apt-get update \
  && python3 -m pip install -U setuptools \
  && pip install ansible boto3 awscli
 
-ARG uid=1001
-ARG gid=1001
+ARG uid=1004
+ARG gid=1004
 ARG user=jenkins
 ARG group=jenkins
 ARG http_port=8080
@@ -27,13 +27,15 @@ ENV JENKINS_INCREMENTALS_REPO_MIRROR=https://repo.jenkins-ci.org/incrementals
 ENV JAVA_HOME=/opt/java/openjdk
 
 COPY jenkins_home/. ${JENKINS_HOME}
-# jenkins uid needs to be changed to 1001
+# jenkins uid needs to be changed to 1004
+# by default jenkins uid is 1000 which is the same as the ec2-user on the host
+# and that causes permission problems when mounting the volume
 # jenkins_home is bind mounted externally and we need to have the same uid
 # as the user owning the external mount point
 RUN usermod -u ${uid} jenkins \
  && groupmod -g ${gid} jenkins \
- && chown -R jenkins:jenkins ${JENKINS_HOME} \
- && chown -R jenkins:jenkins ${REF}
+ && chown -R ${uid}:${gid} ${JENKINS_HOME} \
+ && chown -R ${uid}:${gid} ${REF}
 
 # Jenkins home directory is a volume, so configuration and build history
 # can be persisted and survive image upgrades
