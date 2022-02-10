@@ -37,7 +37,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>%%SHELLCOMMAND%%</command>
+      <command>SHELLCOMMAND</command>
       <configuredLocalRules/>
     </hudson.tasks.Shell>
   </builders>

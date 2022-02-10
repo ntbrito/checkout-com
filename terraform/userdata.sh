@@ -38,16 +38,21 @@ pip3 install awscli
 
 echo "== Create docker container to run jenkins ==" >> /tmp/user_data.log
 
+myip=$(curl -s http://169.254.169.254/latest/meta-data/local-ipv4)
+
 cd /home/ec2-user
+sed -e 's/SHELLCOMMAND/ssh -i \/var\/jenkins_home\/.ssh\/id_rsa ec2-user@${myip} checkout-com\/bin\/build_webapp.sh/' \
+  -i checkout-com/jenkins/jenkins_home/jobs/Deploy-WebApp/config.xml
+
 git clone git://github.com/ntbrito/checkout-com.git
 cd checkout-com/jenkins
 docker build --rm -t jenkins .
 docker run -d --name jenkins --restart always -p 8080:8080 jenkins
 
+myip=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)
 
-my-ip=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)
-sed -e "s/%%SHELLCOMMAND%%/ssh -i \/var\/jenkins_home\/.ssh\/id_rsa ec2-user@${my-ip} checkout-com\/bin\/build_webapp.sh/" \
--i /home/ec2-user/checkout-com/jenkins/jenkins_home/jobs/Deploy-WebApp/config.xml
+sed -e 's/SHELLCOMMAND/ssh -i \/var\/jenkins_home\/.ssh\/id_rsa ec2-user@${myip} checkout-com\/bin\/build_webapp.sh/' \
+  -i /home/ec2-user/checkout-com/jenkins/jenkins_home/jobs/Deploy-WebApp/config.xml
 
 echo "== Create docker container to run my_webapp ==" >> /tmp/user_data.log
 

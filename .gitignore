@@ -2,3 +2,4 @@
 *pycache*
 terraform/.terraform/
 terraform/tf_state/
+terraform.tfstate
