@@ -44,8 +44,7 @@ cd /home/ec2-user
 git clone git://github.com/ntbrito/checkout-com.git
 cd checkout-com/jenkins
 
-sed -e 's/SHELLCOMMAND/ssh -i \/var\/jenkins_home\/.ssh\/id_rsa ec2-user@${myip} \/home\/ec2-user\/checkout-com\/bin\/build_webapp.sh/' \
-  -i jenkins_home/jobs/Deploy-WebApp/config.xml
+sed -e 's/MYIP/${myip}/' -i jenkins_home/jobs/Deploy-WebApp/config.xml
 
 docker build --rm -t jenkins .
 docker run -d --name jenkins --restart always -p 8080:8080 jenkins

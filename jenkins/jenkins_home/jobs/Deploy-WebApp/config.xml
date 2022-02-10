@@ -37,7 +37,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>SHELLCOMMAND</command>
+      <command>ssh -i /var/jenkins_home/.ssh/id_rsa ec2-user@MYIP /home/ec2-user/checkout-com/bin/build_webapp.sh</command>
       <configuredLocalRules/>
     </hudson.tasks.Shell>
   </builders>
