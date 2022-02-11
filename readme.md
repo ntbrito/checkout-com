@@ -55,7 +55,7 @@ This simplifies the setup for a first installation of this service
 
 Subsequent deployments can be done using the jenkins server provided with the solution, this is
 accessible at http://loadbalancer.dns.name:8080, in my case it will be:
-http://checkout-1510984321.eu-west-2.elb.amazonaws.com:8080/
+http://checkout-539481194.eu-west-2.elb.amazonaws.com:8080/
 (user is "checkout" and password is CheckOut@2022)
 
 This is a simple example and may not be up to enterprise standard, for that we would need a test
@@ -70,7 +70,7 @@ No further configuration is required at this point.
 #### A note on DNS
 I did not configure DNS because that would involve registering a domain. To access the service we
 must look at the DNS name of the loadbalancer, in my case pointing the browser to
-http://checkout-1510984321.eu-west-2.elb.amazonaws.com/ will open the website.
+http://checkout-539481194.eu-west-2.elb.amazonaws.com/ will open the website.
 Another problem indirectly related with the lack of a DNS name is that I can not have an SSL
 certificate and encrypt the traffic using HTTPS.
 
