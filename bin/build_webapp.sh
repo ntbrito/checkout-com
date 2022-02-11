@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -x
+
 cd /home/ec2-user/checkout-com/
 git pull
 
@@ -11,5 +13,5 @@ then
   docker rmi my_webapp
 fi
 
-docker build --rm -t my_webapp .
-docker run -d --name my_webapp -p 8080:8080 my_webapp
+docker build --rm -t my_webapp web_container/.
+docker run -d --name my_webapp -p 80:80 my_webapp

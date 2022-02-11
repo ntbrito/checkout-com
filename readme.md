@@ -51,14 +51,19 @@ This will deploy the infrastructure and the application.
 ##### Application deployment
 In the case present here I am creating a docker container to run the http server, and I do
 this at the EC2 creation time with an userdata script.
-This simplifies the setup as I don't need to create another service for CI/CD like Jenkins
-for instance, however it's a bit prone to errors as the execution of the userdata script is
-out of my control, and it can run into issues if networking is not available yet, for instance.
-This may also be an over complicated way to deploy in case we need to update the application.
+This simplifies the setup for a first installation of this service
 
-The userdata script creates the container based on a container provided by the Apache Foundation
-and the code is copied to the DocumentRoot folder on the web server. No further configuration is
-required at this point.
+Subsequent deployments can be done using the jenkins server provided with the solution, this is
+accessible at http://<loadbalancerDNSname>:8080, in my case it will be:
+http://checkout-1323489732.eu-west-2.elb.amazonaws.com:8080/
+(user is "checkout" and password is CheckOut@2022)
+This is a simple example and may not be up to production standard, for that we would need a test
+environment and some testing to be performed and only then we should build for production.
+That would require some knowledge in a testing framework that I do not have.
+
+The userdata script creates the application container based on a container provided by the
+Apache Foundation and the code is copied to the DocumentRoot folder on the web server.
+No further configuration is required at this point.
 
 #### A note on DNS
 I did not configure DNS because that would involve registering a domain. To access the service we
