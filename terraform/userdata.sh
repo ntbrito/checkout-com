@@ -5,8 +5,11 @@ today=$(date +%Y%m%d%H%M)
 
 set -x
 
-echo "== Starting User Data script - $(date) ==" > /tmp/user_data.log
+# this is not ideal but I need to wait for the networking to get ready otherwise some
+# stuff down below will fail
+sleep 120
 
+echo "== Starting User Data script - $(date) ==" > /tmp/user_data.log
 # Make sure ssm is installed so we can open a shell on the instance
 snap install amazon-ssm-agent
 snap start amazon-ssm-agent

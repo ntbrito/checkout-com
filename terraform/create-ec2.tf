@@ -1,6 +1,9 @@
 # Create EC2 instances to host the service
 
 resource "aws_instance" "checkout_ec2" {
+  depends_on             = [aws_nat_gateway.covpc_ngw_az1,
+                            aws_nat_gateway.covpc_ngw_az1,
+                            aws_security_group.app_sec_group]
   count                  = var.instance_count
   ami                    = var.aws_ami
   instance_type          = var.ec2_type
