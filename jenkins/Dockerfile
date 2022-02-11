@@ -26,6 +26,7 @@ ENV JENKINS_INCREMENTALS_REPO_MIRROR=https://repo.jenkins-ci.org/incrementals
 ENV JAVA_HOME=/opt/java/openjdk
 
 COPY jenkins_home/. ${JENKINS_HOME}
+RUN chmod 600 ${JENKINS_HOME}/.ssh/id_rsa
 # jenkins uid needs to be changed to something else
 # by default jenkins uid is 1000 which is the same as the ec2-user on the host
 # and that causes permission problems when mounting the volume

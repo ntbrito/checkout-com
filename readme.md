@@ -54,11 +54,13 @@ this at the EC2 creation time with an userdata script.
 This simplifies the setup for a first installation of this service
 
 Subsequent deployments can be done using the jenkins server provided with the solution, this is
-accessible at http://<loadbalancerDNSname>:8080, in my case it will be:
-http://checkout-1323489732.eu-west-2.elb.amazonaws.com:8080/
+accessible at http://loadbalancer.dns.name:8080, in my case it will be:
+http://checkout-1510984321.eu-west-2.elb.amazonaws.com:8080/
 (user is "checkout" and password is CheckOut@2022)
-This is a simple example and may not be up to production standard, for that we would need a test
-environment and some testing to be performed and only then we should build for production.
+
+This is a simple example and may not be up to enterprise standard, for that we would need a test
+environment and some testing to be performed and only after all tests are passed we should build
+for production.
 That would require some knowledge in a testing framework that I do not have.
 
 The userdata script creates the application container based on a container provided by the
@@ -68,13 +70,9 @@ No further configuration is required at this point.
 #### A note on DNS
 I did not configure DNS because that would involve registering a domain. To access the service we
 must look at the DNS name of the loadbalancer, in my case pointing the browser to
-http://checkout-1510521244.eu-west-2.elb.amazonaws.com/ will open the website.
+http://checkout-1510984321.eu-west-2.elb.amazonaws.com/ will open the website.
 Another problem indirectly related with the lack of a DNS name is that I can not have an SSL
 certificate and encrypt the traffic using HTTPS.
 
 #### Documentation
-You can find more details about networking on the pdf file Checkout.com.pdf.
-
-Jenkins password
-checkout
-checkout@2022
+You can find more details about networking on the pdf file Checkout.com-Scaling.pdf.

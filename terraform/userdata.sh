@@ -53,11 +53,7 @@ docker build --rm -t jenkins .
 docker run -d --name jenkins --restart always -p 8080:8080 jenkins
 
 # I need to copy the public key to the ec2-user on the host
-mkdir /home/ec2-user/.ssh
 cat /home/ec2-user/checkout-com/jenkins/jenkins_home/.ssh/id_rsa.pub >> /home/ec2-user/.ssh/authorized_keys
-chown -R ec2-user:ec2-user /home/ec2-user/.ssh
-chmod 700 /home/ec2-user/.ssh
-chmod 600 /home/ec2-user/.ssh/authorized_keys
 
 echo "== Create docker container to run my_webapp ==" >> /tmp/user_data.log
 
